@@ -1,9 +1,6 @@
 name: check-planned-shutdown
-on: [
-  workflow_dispatch,
-  schedule:
-    - cron: '15 8,9,22 * * *'
-  ]
+on:
+  cron: '20 8,9,15,22 * * *'
 
 jobs:
   check-planned-shutdown:
