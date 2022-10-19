@@ -1,6 +1,8 @@
 name: check-planned-shutdown
 on:
-  workflow_dispatch
+  schedule:
+    - cron:  '57 16 * * *'
+
 
 jobs:
   check-planned-shutdown:
