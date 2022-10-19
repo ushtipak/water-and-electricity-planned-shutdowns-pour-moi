@@ -1,0 +1,19 @@
+name: check-planned-shutdown
+on:
+  - workflow_dispatch
+  - schedule:
+      - cron: '15 8,9,22 * * *'
+
+jobs:
+  check-planned-shutdown:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check water supply
+        run: if [[ "$(curl -sk 'https://www.bvk.rs/planirani-radovi' | grep "Чукарица")" != "" ]]; then echo "No WATER **TODAY** [!]"; exit 1; fi
+
+      - name: Check electricity today
+        run: if [[ "$(curl -sk 'https://www.epsdistribucija.rs/Dan_0_Iskljucenja.htm' | grep "РАДНИЧКА")" != "" ]]; then echo "No ELECTRICITY **TODAY** [!]"; exit 1; fi
+
+      - name: Check electricity tomorrow
+        run: if [[ "$(curl -sk 'https://www.epsdistribucija.rs/Dan_1_Iskljucenja.htm' | grep "РАДНИЧКА")" != "" ]]; then echo "No ELECTRICITY **TOMORROW** [!]"; exit 1; fi
+
