@@ -1,7 +1,7 @@
 name: check-planned-shutdown
 on:
   schedule:
-    - cron:  '0 * * * *'
+    - cron:  '15 9,11,22 * * *'
 
 jobs:
   check-planned-shutdown:
