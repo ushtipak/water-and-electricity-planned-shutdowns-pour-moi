@@ -7,6 +7,9 @@ jobs:
   check-planned-shutdown:
     runs-on: ubuntu-latest
     steps:
+      - name: Check water supply, more *thoroughly* today
+        run: if [ "$(curl -sk 'https://www.bvk.rs/planirani-radovi' | grep "Чукарица" | grep $(date "+%d\."))" != "" ] && [ "$(curl -sk 'https://www.bvk.rs/planirani-radovi' | grep "Радничка")" != "" ]; then echo "*More likely* No WATER **TODAY** [!]"; exit 1; fi
+
       - name: Check water supply today
         run: if [[ "$(curl -sk 'https://www.bvk.rs/planirani-radovi' | grep "Чукарица" | grep $(date "+%d\."))" != "" ]]; then echo "No WATER **TODAY** [!]"; exit 1; fi
 
