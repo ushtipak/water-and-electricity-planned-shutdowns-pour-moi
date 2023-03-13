@@ -11,8 +11,8 @@ jobs:
         run: if [ "$(curl -sk 'https://www.bvk.rs/planirani-radovi' | grep "Чукарица" | grep $(date "+%d\."))" != "" ] && [ "$(curl -sk 'https://www.bvk.rs/planirani-radovi' | grep "Радничка")" != "" ]; then echo "*More likely* No WATER **TODAY** [!]"; exit 1; fi
 
       - name: Check electricity today
-        run: if [[ "$(curl -sk 'https://www.epsdistribucija.rs/Dan_0_Iskljucenja.htm' | grep "РАДНИЧКА")" != "" ]]; then echo "No ELECTRICITY **TODAY** [!]"; exit 1; fi
+        run: if [[ "$(curl -sk 'https://www.epsdistribucija.rs/Dan_0_Iskljucenja.htm' | grep "РАДНИЧКА" | grep -i "Чукарица")" != "" ]]; then echo "No ELECTRICITY **TODAY** [!]"; exit 1; fi
 
       - name: Check electricity tomorrow
-        run: if [[ "$(curl -sk 'https://www.epsdistribucija.rs/Dan_1_Iskljucenja.htm' | grep "РАДНИЧКА")" != "" ]]; then echo "No ELECTRICITY **TOMORROW** [!]"; exit 1; fi
+        run: if [[ "$(curl -sk 'https://www.epsdistribucija.rs/Dan_1_Iskljucenja.htm' | grep "РАДНИЧКА" | grep -i "Чукарица")" != "" ]]; then echo "No ELECTRICITY **TOMORROW** [!]"; exit 1; fi
 
